@@ -45,3 +45,10 @@ footer {
     padding: 10px;
 }
 
+#advanced div {
+    height: 5000px; /* Adjust the height as needed */
+}
+
+#section {
+    height: 100%;
+}

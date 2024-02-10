@@ -1,124 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="python.css">
-    <title>Python</title>
+    <title>C</title>
+    <script src="c.js"></script>
 </head>
+
 <body>
 
     <div>
         <header>
-            <h1>Programando con Python</h1>
-            <p>Bienvenido! En esta seccion vamos a ir paso por paso haciendo un juego en python de adivinar numeros aleatorios!</p>
+            <h1>Programando con C</h1>
+            <p>Bienvenido! En vez de seguir el tutorial paso a paso vamos a permitirte hacerlo tu solo!</p>
         </header>
 
         <nav>
             <ul>
                 <li><a href="#introduction">Introduccion</a></li>
                 <li><a href="#basics">Programar</a></li>
-                <li><a href="#advanced">IDE</a></li>
+                <li><a href="#advanced">Resultado</a></li>
                 <li><a href="index.html">Volver al menu</a></li>
                 <!-- Add more sections as needed -->
             </ul>
         </nav>
 
         <section id="introduction">
-            <h2>Introduccion y prerequisitos</h2>
-            <p>Para completar este proyecto, un conocimiento mediano de la programacion es recomendado.
+            <h2>Planteamiento del problema</h2>
+            <p>En este proyecto vas a programar un validador de tarjetas de credito.
+                Para hacer esto vas a usar el algoritmo de Luhn y lo vas a implementar en C.
             </p>
         </section>
 
         <section id="basics">
             <h2>Empezar a programar</h2>
-            <p>Para empezar, vamos a importar nuestros dos libraries necesarios: math y random
-                <pre>
-                    <code class="codes">
-                        import math
-                        import random
-                    </code>
-                </pre>
-                Y ahora para hacer el juego un poco mas facil vamos a crear que declaran el limite superior y inferior:
-                <pre>
-                    <code class="codes">
-                        # Taking Inputs
-                        lower = int(input("Enter Lower bound:- "))
- 
-                        # Taking Inputs
-                        upper = int(input("Enter Upper bound:- "))
+            <p>El algoritmo de Luhn, también conocido como algoritmo de suma de verificación mod 10, se utiliza comúnmente en la validación de números de tarjetas de crédito y otros números de identificación. Este algoritmo permite verificar la autenticidad de un número mediante una fórmula de verificación.</p>
+            
+            <p><strong>Problema: Validador de Tarjetas de Crédito con el Algoritmo de Luhn</strong></p>
 
-                    </code>
-                </pre>
-                A continuacion, tenemos que definir nuestro numero random y para hacer esto vamos a usar la biblioteca random.
-                <br>
-                Esta biblioteca y especificamente la funcion random.randint nos cogera un numero aleatorio entre los dos variables declarados antes.
+            <p><strong>Descripción</strong>:</p>
+            <p>Tu tarea es implementar un programa en el lenguaje de programación C que valide números de tarjetas de crédito utilizando el algoritmo de Luhn. El algoritmo de Luhn funciona de la siguiente manera:</p>
+            <ol>
+                <li>Empieza desde el dígito más a la derecha y mueve hacia la izquierda.</li>
+                <li>Duplica el valor de cada segundo dígito.</li>
+                <li>Si la duplicación resulta en un número mayor que 9, resta 9 al resultado.</li>
+                <li>Suma todos los dígitos obtenidos, incluidos los no duplicados.</li>
+                <li>Si la suma total es un múltiplo de 10, entonces el número de la tarjeta es válido según el algoritmo de Luhn.</li>
+            </ol>
 
-                <pre>
-                    <code class="codes">                  
-                        x = random.randint(lower, upper)
+            <p><strong>Ejemplo</strong>:</p>
+            <p>Supongamos que el número de la tarjeta de crédito es 45320151128336. Aplicamos el algoritmo de Luhn:</p>
+            <ol>
+                <li>Invertimos el número: 63382115102354</li>
+                <li>Duplicamos los dígitos en las posiciones impares (comenzando desde la derecha): 6(6)3(8)2(1)1(5)0(2)3(5)4</li>
+                <li>Restamos 9 si el doble es mayor que 9: 6(6)3(7)2(1)1(5)0(2)3(5)4</li>
+                <li>Sumamos todos los dígitos: 6 + 6 + 3 + 7 + 2 + 1 + 1 + 5 + 0 + 2 + 3 + 5 + 4 = 45</li>
+            </ol>
+            <p>La suma total (45) no es un múltiplo de 10, por lo que el número de tarjeta no es válido según el algoritmo de Luhn.</p>
+
+            <p><strong>Requerimientos del Programa</strong></p>
+            <ul>
+                <li>El programa debe solicitar al usuario que ingrese un número de tarjeta de crédito.</li>
+                <li>Debe aplicar el algoritmo de Luhn para verificar si el número es válido.</li>
+                <li>Mostrar un mensaje indicando si la tarjeta es válida o no.</li>
+            </ul>
+
+            <p><strong>Ejemplo de Ejecución</strong></p>
+            <pre>
+                    <code>
+                        Ingrese el número de tarjeta de crédito: 45320151128336
+                        La tarjeta de crédito es inválida según el algoritmo de Luhn.
                     </code>
-                </pre>
-                Ahora, tenemos que limitar los intentos del usuario. Para hacer esto implementaremos un logaritmo ya que cada vez esta partiendo el range por la mitad.
-                <pre>
-                    <code class="codes">
-                        print("\n\tYou've only ", round(math.log(upper - lower + 1, 2))," chances to guess the integer!\n")
- 
-                    </code>
-                </pre>
-                A continuacion, vamos iniciar un while loop mientras que nuestro intentos sea menor a lo calculado previamente, para hacer esto declararemos una variable count y empezaremos el loop.
-                <pre>
-                    <code class="codes">
-                        # Initializing the number of guesses.
-                        count = 0
-                            
-                        # for calculation of minimum number of
-                        # guesses depends upon range
-                        while count < math.log(upper - lower + 1, 2):
-                            count += 1
-                    </code>
-                </pre>
-                En el while loop, preguntaremos al usuario que adivine y implementaremos la logica del programa.
-                <pre>
-                    <code class="codes">
-                        while count < math.log(upper - lower + 1, 2):
-                            count += 1
-                        
-                            # taking guessing number as input
-                            guess = int(input("Guess a number:- "))
-                        
-                            # Condition testing
-                            if x == guess:
-                                print("Congratulations you did it in ",
-                                    count, " try")
-                                # Once guessed, loop will break
-                                break
-                            elif x > guess:
-                                print("You guessed too small!")
-                            elif x < guess:
-                                print("You Guessed too high!")
-                    </code>
-                </pre>
-                Y finalmente pondriamos la condicion si al final no consigue adivinar el numero.
-                <pre>
-                    <code class="codes">
-                        if count >= math.log(upper - lower + 1, 2):
-                            print("\nThe number is %d" % x)
-                            print("\tBetter Luck Next time!")  
-                    </code>
-                </pre>
-            </p>
+            </pre>
+
+            <p>Buena suerte! Recuerda que si tienes dudas al final tienes la respuesta. Es recomendado intentar hacerlo solo.</p>
+
+
+            <iframe src="https://www.jdoodle.com/a/7dWk" height="1500" width="100%"></iframe>
+        </section>
         </section>
 
         <section id="advanced">
-            <h2>Pruebalo tu!</h2>
-            <p>Con lo que has aprendido ahora tienes que juntar tu todo el codigo!</p>
-            <iframe src="https://trinket.io/embed/python/3d8d7ce66b" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-        </section>
+            <p>Aqui tienes el resultado! Si quieres verlo apreta el boton.</p>
+            <button onClick="showResult()">Resultado</button>
+
+            <div id="resultDiv">
+
+            </div>
 
         <footer>
             <p>&copy; 2024 Proyecto. Todos los derechos reservados</p>
         </footer>
     </div>
 </body>
+
 </html>

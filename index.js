@@ -1,15 +1,15 @@
 function websiteValidator()
 {
-    var userInput = document.getElementById("userInput").value;
+    var userInput = document.getElementById("userInput").value.toLowerCase();
 
-    if (userInput == "Java"){
+    if (userInput == "java"){
         window.location.href="java.html"
     } 
-    else if (userInput == "Python")
+    else if (userInput == "python")
     {
         window.location.href = "python.html"
     }
-    else if (userInput == "C")
+    else if (userInput == "c")
     {
         window.location.href = "c.html"
     }
@@ -21,5 +21,5 @@ function websiteValidator()
 
 
 function compilers(){
-    window.location.href = "compilers.html"
+    window.location.href = "compile.ejs"
 }
