@@ -16,6 +16,11 @@ if (process.env.NODE_ENV !== 'production') {
     email => users.find(user => user.email === email),
     id => users.find(user => user.id === id)
   )
+
+  function allowUnauthenticated(req, res, next) {
+    // Allow unauthenticated users to access any route
+    return next();
+  }
   
   const users = []
   
@@ -30,9 +35,16 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(passport.initialize())
   app.use(passport.session())
   app.use(methodOverride('_method'))
+  app.use('/public', express.static('public'))
   
-  app.get('/', checkAuthenticated, (req, res) => {
-    res.render('compile.ejs', { name: req.user.name })
+
+  app.get('/', allowUnauthenticated, (req, res) => {
+    res.render('index.ejs')
+  });
+
+
+  app.get('/compile', allowUnauthenticated, (req, res) => {
+    res.render('compile.ejs')
   })
   
   app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -63,6 +75,25 @@ if (process.env.NODE_ENV !== 'production') {
       res.redirect('/register')
     }
   })
+
+  app.get('/java', allowUnauthenticated, (req, res) => {
+    res.render('java.ejs');
+  })
+
+  app.get('/python', allowUnauthenticated, (req, res) => {
+    res.render('python.ejs');
+  })
+
+  app.get('/c', allowUnauthenticated, (req, res) => {
+    res.render('c.ejs');
+  })
+
+  app.get('/error304', allowUnauthenticated, (req, res) => {
+    res.render('error304.ejs');
+  })
+
+
+
   
   app.delete('/logout', (req, res, next) => {
     req.logOut((err) => {

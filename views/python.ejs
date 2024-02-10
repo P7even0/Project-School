@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/assets/python.css" type="text/css">
+    <title>Python</title>
+</head>
+<body>
+
+    <div>
+        <header>
+            <h1>Programando con Python</h1>
+            <p>Bienvenido! En esta seccion vamos a ir paso por paso haciendo un juego en python de adivinar numeros aleatorios!</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#introduction">Introduccion</a></li>
+                <li><a href="#basics">Programar</a></li>
+                <li><a href="#advanced">IDE</a></li>
+                <li><a href="index.html">Volver al menu</a></li>
+                <!-- Add more sections as needed -->
+            </ul>
+        </nav>
+
+        <section id="introduction">
+            <h2>Introduccion y prerequisitos</h2>
+            <p>Para completar este proyecto, un conocimiento mediano de la programacion es recomendado.
+            </p>
+        </section>
+
+        <section id="basics">
+            <h2>Empezar a programar</h2>
+            <p>Para empezar, vamos a importar nuestros dos libraries necesarios: math y random
+                <pre>
+                    <code class="codes">
+                        import math
+                        import random
+                    </code>
+                </pre>
+                Y ahora para hacer el juego un poco mas facil vamos a crear que declaran el limite superior y inferior:
+                <pre>
+                    <code class="codes">
+                        # Taking Inputs
+                        lower = int(input("Enter Lower bound:- "))
+ 
+                        # Taking Inputs
+                        upper = int(input("Enter Upper bound:- "))
+
+                    </code>
+                </pre>
+                A continuacion, tenemos que definir nuestro numero random y para hacer esto vamos a usar la biblioteca random.
+                <br>
+                Esta biblioteca y especificamente la funcion random.randint nos cogera un numero aleatorio entre los dos variables declarados antes.
+
+                <pre>
+                    <code class="codes">                  
+                        x = random.randint(lower, upper)
+                    </code>
+                </pre>
+                Ahora, tenemos que limitar los intentos del usuario. Para hacer esto implementaremos un logaritmo ya que cada vez esta partiendo el range por la mitad.
+                <pre>
+                    <code class="codes">
+                        print("\n\tYou've only ", round(math.log(upper - lower + 1, 2))," chances to guess the integer!\n")
+ 
+                    </code>
+                </pre>
+                A continuacion, vamos iniciar un while loop mientras que nuestro intentos sea menor a lo calculado previamente, para hacer esto declararemos una variable count y empezaremos el loop.
+                <pre>
+                    <code class="codes">
+                        # Initializing the number of guesses.
+                        count = 0
+                            
+                        # for calculation of minimum number of
+                        # guesses depends upon range
+                        while count < math.log(upper - lower + 1, 2):
+                            count += 1
+                    </code>
+                </pre>
+                En el while loop, preguntaremos al usuario que adivine y implementaremos la logica del programa.
+                <pre>
+                    <code class="codes">
+                        while count < math.log(upper - lower + 1, 2):
+                            count += 1
+                        
+                            # taking guessing number as input
+                            guess = int(input("Guess a number:- "))
+                        
+                            # Condition testing
+                            if x == guess:
+                                print("Congratulations you did it in ",
+                                    count, " try")
+                                # Once guessed, loop will break
+                                break
+                            elif x > guess:
+                                print("You guessed too small!")
+                            elif x < guess:
+                                print("You Guessed too high!")
+                    </code>
+                </pre>
+                Y finalmente pondriamos la condicion si al final no consigue adivinar el numero.
+                <pre>
+                    <code class="codes">
+                        if count >= math.log(upper - lower + 1, 2):
+                            print("\nThe number is %d" % x)
+                            print("\tBetter Luck Next time!")  
+                    </code>
+                </pre>
+            </p>
+        </section>
+
+        <section id="advanced">
+            <h2>Pruebalo tu!</h2>
+            <p>Con lo que has aprendido ahora tienes que juntar tu todo el codigo!</p>
+            <iframe src="https://trinket.io/embed/python/3d8d7ce66b" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Proyecto. Todos los derechos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>
