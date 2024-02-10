@@ -1,4 +1,167 @@
-<h1>Hi <%= name %></h1>
-<form action="/logout?_method=DELETE" method="POST">
-  <button type="submit">Log Out</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Main Menu</title>
+    <link rel="stylesheet" href="public/assets/compiles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .center {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #217dbb;
+        }
+
+        section {
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+
+        ol {
+            margin-top: 10px;
+            list-style-type: decimal;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Compiler Main Menu</h1>
+            <p>Welcome to our compiler service. Choose an option below:</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Compiler Options</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+
+        <div class="center">
+            <div class="auth-buttons">
+                <a href="/login" class="button">Login</a>
+                <a href="/register" class="button">Register</a>
+            </div>
+        </div>
+
+        <section class="features">
+            <h2>Key Features</h2>
+            <p>Our compiler service provides the following features:</p>
+            <ul>
+                <li>Support for Python, C, and Java</li>
+                <li>Interactive Compiler Options</li>
+                <li>Project Tutorials and Examples</li>
+                <li>User Authentication and Code Saving</li>
+            </ul>
+        </section>
+
+        <section class="get-started">
+            <h2>Get Started</h2>
+            <p>Ready to start coding? Follow these steps:</p>
+            <ol>
+                <li>Create an account or log in</li>
+                <li>Choose your preferred compiler</li>
+                <li>Explore project tutorials</li>
+                <li>Write and compile your code</li>
+            </ol>
+        </section>
+
+        <section class="about-us">
+            <h2>About Us</h2>
+            <p>Our compiler service is dedicated to providing a user-friendly coding environment for enthusiasts and beginners alike. Join our community and enhance your programming skills!</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Compiler Service. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
