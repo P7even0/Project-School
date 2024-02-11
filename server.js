@@ -9,20 +9,47 @@ if (process.env.NODE_ENV !== 'production') {
   const flash = require('express-flash')
   const session = require('express-session')
   const methodOverride = require('method-override')
+  const mongoose = require('mongoose')
+  const User = require('./model/models.js')
+  
+  
+  mongoose.connect('mongodb://localhost:27017/mydatabase')
+    .then(() => {
+      console.log('Connected to MongoDB');
+    })
+    .catch((error) => {
+      console.error('Error connecting to MongoDB:', error);
+    });
+
   
   const initializePassport = require('./passport-config')
   initializePassport(
     passport,
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-  )
+    async (email) => {
+      try {
+        const user = await User.findOne({ email: email });
+        return user;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+    async (id) => {
+      try {
+        const user = await User.findById(id);
+        return user;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+  );
 
   function allowUnauthenticated(req, res, next) {
     // Allow unauthenticated users to access any route
     return next();
   }
   
-  const users = []
   
   app.set('view-engine', 'ejs')
   app.use(express.urlencoded({ extended: false }))
@@ -42,6 +69,18 @@ if (process.env.NODE_ENV !== 'production') {
     res.render('index.ejs')
   });
 
+  app.get('/dashboard', allowUnauthenticated, (req, res) => {
+    res.render('dashboard.ejs')
+  })
+
+  
+  app.get('/ide', allowUnauthenticated, (req, res) => {
+    res.render('ide.ejs')
+  });
+
+  app.get('/text', allowUnauthenticated, (req, res) => {
+    res.render('text.ejs')
+  });
 
   app.get('/compile', allowUnauthenticated, (req, res) => {
     res.render('compile.ejs')
@@ -52,7 +91,7 @@ if (process.env.NODE_ENV !== 'production') {
   })
   
   app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/dashboard',
     failureRedirect: '/login',
     failureFlash: true
   }))
@@ -63,18 +102,30 @@ if (process.env.NODE_ENV !== 'production') {
   
   app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      users.push({
-        id: Date.now().toString(),
+      const existingUser = await User.findOne({ email: req.body.email });
+  
+      if (existingUser) {
+        // If the email already exists, redirect to the registration page
+        console.log('Email already exists in the database.');
+        return res.redirect('/register');
+      }
+  
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: hashedPassword
-      })
-      res.redirect('/login')
-    } catch {
-      res.redirect('/register')
+        password: hashedPassword,
+      });
+  
+      await newUser.save();
+      console.log('User saved successfully.');
+      res.redirect('/login');
+    } catch (error) {
+      console.error(error);
+      res.redirect('/register');
     }
-  })
+  });
+  
 
   app.get('/java', allowUnauthenticated, (req, res) => {
     res.render('java.ejs');

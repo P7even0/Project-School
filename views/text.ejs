@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor</title>
+    <link rel="stylesheet" type="text/css" href="/public/assets/dashboard.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <script 
+      src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    </script>
+    <!-- Additional libraries or stylesheets can be added here -->
+</head>
+<body>
+    <header>
+        <h1>Text Editor</h1>
+    </header>
+
+    <div id="container">
+        <textarea name="content"></textarea>
+    </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#container' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+</body>
+</html>

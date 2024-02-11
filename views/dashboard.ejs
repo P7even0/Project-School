@@ -1,4 +1,55 @@
-<h1>Hi</h1>
-<form action="/logout?_method=DELETE" method="POST">
-  <button type="submit">Log Out</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/public/assets/dashboard.css">
+    <!-- Additional libraries or stylesheets can be added here -->
+</head>
+
+<body>
+
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+
+    <div class="container">
+
+        
+        <div class="main-content">
+            <div class="card">
+                <h2>Welcome, user</h2>
+                <p>This is your personalized dashboard. Explore the features and start coding!</p>
+            </div>
+
+            <div class="card">
+                <h2>Compilers</h2>
+                <p>Choose a language and start coding with our interactive compilers.
+                    In order to save your code you will need to login into jdoodle
+                </p>
+                <a href="/ide" class="button">Explore Compilers</a>
+            </div>
+
+            <div class="card">
+                <h2>Text Editor</h2>
+                <p>Open up a text editor to write anything you want!</p>
+                <a href="/text" class="button">Text Editor</a>
+            </div>
+
+            <div class="card">
+                <form action="/logout?_method=DELETE" method="POST">
+                    <button class="button" type="submit">Log Out</button>
+                </form>
+            </div>
+
+            <!-- Additional cards or content can be added here -->
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
